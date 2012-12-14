@@ -1,9 +1,18 @@
 CREATE TABLE lastpass (
-  url TEXT NOT NULL,
-  username TEXT NOT NULL,
-  password TEXT NOT NULL,
-  extra TEXT NOT NULL,
-  name TEXT NOT NULL,
-  grouping TEXT NOT NULL,
-  fav TEXT NOT NULL
+  url TEXT,
+  username TEXT,
+  password TEXT,
+  extra TEXT,
+  name TEXT,
+  grouping TEXT,
+  fav TEXT
 );
+
+CREATE VIEW upm AS SELECT
+  "name" AS "account name",
+  "username" AS "user id",
+  "password",
+  "url",
+  "extra" AS "notes"
+FROM lastpass
+WHERE grouping != 'Secure Notes';
