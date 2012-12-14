@@ -6,9 +6,16 @@ chmod 600 $lastpasscsv $db
 
 # Passwords file
 if [ "$#" = 1 ]; then
+  # Read from first argument
   sed 1d "$1" > $lastpasscsv
-else
+elif [ ! -t ]; then
+  # Read from stdin
   sed 1d /dev/stdin > $lastpasscsv
+else
+  # Print help
+  echo "USAGE: $0 [input file]"
+  echo 'You can also use stdin.'
+  exit 1
 fi
 
 sqlite3 $db << EOF
